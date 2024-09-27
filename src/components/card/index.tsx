@@ -2,7 +2,7 @@ import { ShoppingCart } from '@phosphor-icons/react'
 import { useTheme } from 'styled-components'
 
 import { Container, Tags, Description, Control, Price, Order } from './style'
-import { QuantityInput } from '../form/index'
+import { QuantityInput } from '../form/QuantityInput/index'
 
 type CardProps = {
   coffee: {
@@ -40,7 +40,7 @@ export function Card({ coffee }: CardProps) {
 
         <Order>
           <QuantityInput />
-          <button>
+          <button className="shoppingCart">
             <ShoppingCart size={22} weight="fill" color={theme['base-card']} />
           </button>
         </Order>

@@ -8,6 +8,10 @@ export const HeaderContainer = styled.header`
   display: flex;
   justify-content: space-between;
   align-items: center;
+
+  @media (max-width: 420px) {
+    padding: 2rem;
+  }
 `
 
 export const Aside = styled.aside`

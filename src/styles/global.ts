@@ -14,7 +14,6 @@ export const GlobalStyle = createGlobalStyle`
   }
   
   .titleXL {
-    color: ${(props) => props.theme['base-title']};
     line-height: 130%;
     font-family: "Baloo 2", sans-serif;
     font-size: 3rem;
@@ -22,7 +21,6 @@ export const GlobalStyle = createGlobalStyle`
   }
 
   .titleL {
-    color: ${(props) => props.theme['base-title']};
     line-height: 130%;
     font-family: "Baloo 2", sans-serif;
     font-size: 2rem;
@@ -30,7 +28,6 @@ export const GlobalStyle = createGlobalStyle`
   }
 
   .titleM {
-    color: ${(props) => props.theme['base-title']};
     line-height: 130%;
     font-family: "Baloo 2", sans-serif;
     font-size: 1.5rem;
@@ -38,7 +35,6 @@ export const GlobalStyle = createGlobalStyle`
   }
 
   .titleS {
-    color: ${(props) => props.theme['base-title']};
     line-height: 130%;
     font-family: "Baloo 2", sans-serif;
     font-size: 1.25rem;
@@ -46,7 +42,6 @@ export const GlobalStyle = createGlobalStyle`
   }
 
   .titleXS {
-    color: ${(props) => props.theme['base-title']};
     line-height: 130%;
     font-family: "Baloo 2", sans-serif;
     font-size: 1.125rem;
@@ -54,7 +49,6 @@ export const GlobalStyle = createGlobalStyle`
   }
 
   .textL {
-    color: ${(props) => props.theme['base-text']};
     line-height: 130%;
     font-family: "Roboto", sans-serif;
     font-size: 1.25rem;
@@ -62,7 +56,6 @@ export const GlobalStyle = createGlobalStyle`
   }
 
   .textM {
-    color: ${(props) => props.theme['base-text']};
     line-height: 130%;
     font-family: "Roboto", sans-serif;
     font-size: 1rem;
@@ -77,7 +70,6 @@ export const GlobalStyle = createGlobalStyle`
   }
 
   .textXS {
-    color: ${(props) => props.theme['base-text']};
     line-height: 130%;
     font-family: "Roboto", sans-serif;
     font-size: 0.75rem;
@@ -101,7 +93,6 @@ export const GlobalStyle = createGlobalStyle`
   }
 
   .buttonM {
-    color: ${(props) => props.theme['base-button']};
     line-height: 160%;
     font-family: "Roboto", sans-serif;
     font-size: 0.75rem;

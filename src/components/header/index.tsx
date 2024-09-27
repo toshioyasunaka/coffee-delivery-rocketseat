@@ -1,3 +1,4 @@
+/* eslint-disable import/no-absolute-path */
 import { MapPin, ShoppingCart } from '@phosphor-icons/react'
 
 import { HeaderContainer, Aside, Badge } from './style'

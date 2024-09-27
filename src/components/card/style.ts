@@ -72,11 +72,16 @@ export const Order = styled.div`
     display: flex;
     align-items: center;
     justify-content: center;
+    background-color: ${(props) => props.theme['purple-dark']};
     padding: 0.5rem;
     border-radius: 6px;
-    background-color: ${(props) => props.theme['purple-dark']};
     width: 2.375rem;
     border: none;
     cursor: pointer;
+  }
+
+  button.shoppingCart:hover {
+    background-color: ${(props) => props.theme.purple};
+    transition: background-color 3ms;
   }
 `

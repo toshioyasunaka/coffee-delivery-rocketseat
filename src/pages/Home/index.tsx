@@ -1,9 +1,11 @@
+/* eslint-disable import/no-absolute-path */
 import { ShoppingCart, Package, Timer, Coffee } from '@phosphor-icons/react'
 
 import { Hero, Info, Strength, CoffeeList, CoffeeGrid } from './style'
 import { Card } from '../../components/card'
 import HeroImage from '/images/hero.svg'
 import { coffees } from '../../../data.json'
+import { Header } from '../../components/header'
 
 const strengths = [
   {
@@ -31,6 +33,7 @@ const strengths = [
 export function Home() {
   return (
     <div>
+      <Header />
       <Hero>
         <section>
           <div className="slogan">
