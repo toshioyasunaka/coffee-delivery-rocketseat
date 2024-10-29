@@ -1,4 +1,5 @@
 import { Trash } from '@phosphor-icons/react'
+import { NavLink } from 'react-router-dom'
 
 import { Cart, Container, TrashButton, CartSummary } from './style'
 import { QuantityInput } from '../QuantityInput/index'
@@ -15,9 +16,10 @@ interface Coffees {
 
 interface CartItemProps {
   coffees: Coffees[]
+  submitOrder: () => void
 }
 
-export function CartItem({ coffees }: CartItemProps) {
+export function CartItem({ coffees, submitOrder }: CartItemProps) {
   const theme = useTheme()
 
   const deliveryCost = 3.5
@@ -27,6 +29,10 @@ export function CartItem({ coffees }: CartItemProps) {
     .toFixed(2)
 
   const totalCartValue = parseFloat(totalValueOfCartItems) + deliveryCost
+
+  function handleSubmit() {
+    submitOrder()
+  }
 
   return (
     <Cart>
@@ -71,9 +77,9 @@ export function CartItem({ coffees }: CartItemProps) {
           <span>R$ {totalCartValue.toFixed(2)}</span>
         </div>
 
-        <button type="submit" form="order">
-          CONFIRMAR PEDIDO
-        </button>
+        <NavLink to="/success">
+          <button onClick={() => handleSubmit()}>CONFIRMAR PEDIDO</button>
+        </NavLink>
       </CartSummary>
     </Cart>
   )

@@ -72,6 +72,10 @@ export const CartSummary = styled.div`
     font-weight: bold;
   }
 
+  a {
+    text-decoration: none;
+  }
+
   button {
     display: flex;
     align-items: center;

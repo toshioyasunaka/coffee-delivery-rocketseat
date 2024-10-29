@@ -2,7 +2,6 @@ import { MapPin, Timer, CurrencyDollar } from '@phosphor-icons/react'
 
 /* eslint-disable import/no-absolute-path */
 import MotoboyIllustration from '/images/motoboyIllustration.svg'
-import { Header } from '../../components/header'
 import { Container, Summary, SummaryDetails, Info } from './style'
 
 const infos = [
@@ -33,7 +32,6 @@ const infos = [
 export function Success() {
   return (
     <>
-      <Header />
       <Container>
         <div className="container">
           <h1 className="titleL">Uhu! Pedido confirmado</h1>

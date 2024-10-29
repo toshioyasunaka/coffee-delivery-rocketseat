@@ -27,7 +27,7 @@ export const Info = styled.div`
 `
 
 interface StrengthProps {
-  variant: string
+  $variant: string
 }
 
 export const Strength = styled.div<StrengthProps>`
@@ -41,7 +41,7 @@ export const Strength = styled.div<StrengthProps>`
     padding: 0.5rem;
     border-radius: 50%;
 
-    ${(props) => `background-color: ${props.theme[props.variant]}`}
+    ${(props) => `background-color: ${props.theme[props.$variant]}`}
   }
 `
 

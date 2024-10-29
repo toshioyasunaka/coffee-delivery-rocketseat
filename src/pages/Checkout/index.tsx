@@ -1,6 +1,7 @@
 import { useForm } from 'react-hook-form'
+import { useRef } from 'react'
 import { zodResolver } from '@hookform/resolvers/zod'
-import * as zod from 'zod'
+import { z } from 'zod'
 import {
   MapPinLine,
   CurrencyDollar,
@@ -10,7 +11,6 @@ import {
 } from '@phosphor-icons/react'
 import { useTheme } from 'styled-components'
 
-import { Header } from '../../components/header'
 import {
   PaymentMethod,
   PaymentRadio,
@@ -28,50 +28,43 @@ import {
 } from './style'
 import { coffees } from '../../../data.json'
 
-const newOrderFormValidationSchema = zod.object({
-  cep: zod.string().min(1, 'Informe a tarefa'),
-  city: zod.string().min(1, 'Informe a cidade'),
-  complement: zod.string(),
-  district: zod.string().min(1, 'Informe o bairro'),
-  number: zod.number().min(1, 'Informe o número'),
-  paymentMethod: zod.string().min(1, 'Informe o número'),
-  street: zod.string().min(1, 'Informe a rua'),
-  uf: zod.string().min(1, 'Informe o estado'),
+const newOrderValidationSchema = z.object({
+  cep: z.string({ invalid_type_error: 'Informe o CEP' }),
+  city: z.string(),
+  complement: z.string(),
+  district: z.string(),
+  number: z.string(),
+  street: z.string(),
+  uf: z.string(),
+  paymentMethod: z.enum(['credit', 'debt', 'cash'], {
+    invalid_type_error: 'Informe um método de pagamento',
+  }),
 })
 
 export function Checkout() {
   const theme = useTheme()
+  const ref = useRef(null)
 
-  type NewOrderFormData = zod.infer<typeof newOrderFormValidationSchema>
+  type FormInputs = z.infer<typeof newOrderValidationSchema>
 
-  const { register, watch, handleSubmit } = useForm<NewOrderFormData>({
-    resolver: zodResolver(newOrderFormValidationSchema),
+  const { register, watch, handleSubmit } = useForm<FormInputs>({
+    resolver: zodResolver(newOrderValidationSchema),
     defaultValues: {
-      cep: '',
-      city: '',
-      complement: '',
-      district: '',
-      number: 0,
-      paymentMethod: '',
-      street: '',
-      uf: '',
+      paymentMethod: 'credit',
     },
   })
 
-  function handleCreateNewOrder(data: NewOrderFormData) {
+  function handleSubmitOrder(data: FormInputs) {
     console.log(data)
   }
 
   const selectedPaymentMethod = watch('paymentMethod')
-  const cep = watch('cep')
-  console.log(cep)
 
   return (
     <>
-      <Header />
       <CheckOut>
         <AddressAndCart>
-          <Form id="order" onSubmit={handleSubmit(handleCreateNewOrder)}>
+          <Form id="order" onSubmit={handleSubmit(handleSubmitOrder)}>
             <h2 className="titleXS">Complete seu pedido</h2>
 
             <Card>
@@ -87,7 +80,7 @@ export function Checkout() {
 
               <AddressForm>
                 <input
-                  type="text"
+                  type="string"
                   id="cep"
                   placeholder="CEP"
                   {...register('cep')}
@@ -99,7 +92,7 @@ export function Checkout() {
                   {...register('street')}
                 />
                 <input
-                  type="text"
+                  type="number"
                   id="number"
                   placeholder="Número"
                   {...register('number')}
@@ -148,6 +141,7 @@ export function Checkout() {
                   isSelected={selectedPaymentMethod === 'credit'}
                   value={PaymentMethod.CREDIT_CARD}
                   {...register('paymentMethod')}
+                  ref={ref}
                 >
                   <CreditCard size={16} color={theme.purple} />
                   <span>CARTÃO DE CRÉDITO</span>
@@ -157,6 +151,7 @@ export function Checkout() {
                   isSelected={selectedPaymentMethod === 'debt'}
                   value={PaymentMethod.DEBT_CARD}
                   {...register('paymentMethod')}
+                  ref={ref}
                 >
                   <Bank size={16} color={theme.purple} />
                   <span>CARTÃO DE DÉBITO</span>
@@ -166,6 +161,7 @@ export function Checkout() {
                   isSelected={selectedPaymentMethod === 'cash'}
                   value={PaymentMethod.CASH}
                   {...register('paymentMethod')}
+                  ref={ref}
                 >
                   <Money size={16} color={theme.purple} />
                   <span>DINHEIRO</span>
@@ -178,7 +174,10 @@ export function Checkout() {
             <h2 className="titleXS">Cafés selecionados</h2>
 
             <Card className="cart">
-              <CartItem coffees={[coffees[0], coffees[1]]} />
+              <CartItem
+                submitOrder={handleSubmit(handleSubmitOrder)}
+                coffees={[coffees[0], coffees[1]]}
+              />
             </Card>
           </Cart>
         </AddressAndCart>

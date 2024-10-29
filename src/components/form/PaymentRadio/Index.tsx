@@ -1,3 +1,5 @@
+import { forwardRef, LegacyRef } from 'react'
+
 import { Radio } from './style'
 
 export enum PaymentMethod {
@@ -10,6 +12,7 @@ type PaymentRadioProps = {
   children: string | JSX.Element | JSX.Element[]
   value: PaymentMethod
   isSelected: boolean
+  ref: HTMLInputElement
 }
 
 const radios: NodeListOf<HTMLInputElement> = document.querySelectorAll(
@@ -31,11 +34,11 @@ function checkRadio(value: PaymentMethod): void {
   }
 }
 
-export function PaymentRadio({
-  children,
-  value,
-  isSelected,
-}: PaymentRadioProps) {
+export const PaymentRadio = forwardRef(function PaymentRadio(
+  { children, value, isSelected }: PaymentRadioProps,
+  ref: LegacyRef<HTMLInputElement>,
+) {
+  console.log(ref)
   return (
     <Radio className="paymentRadio" data-state={isSelected}>
       <input
@@ -43,8 +46,9 @@ export function PaymentRadio({
         name="paymentMethod"
         value={value}
         onClick={() => checkRadio(value)}
+        ref={ref}
       />
       {children}
     </Radio>
   )
-}
+})
