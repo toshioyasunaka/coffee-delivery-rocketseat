@@ -65,7 +65,7 @@ export function Card({ coffee }: CardProps) {
         <Order>
           <QuantityInput />
           <button
-            className={useCheckIcon ? 'CheckIcon' : 'shoppingCart'}
+            className={useCheckIcon ? 'checkIcon' : 'shoppingCart'}
             onClick={changeIcon}
           >
             {useCheckIcon ? (

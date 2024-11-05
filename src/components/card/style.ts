@@ -81,7 +81,7 @@ export const Order = styled.div`
     transition: all 0.2s;
   }
 
-  button.checkedIcon {
+  button.checkIcon {
     background-color: ${(props) => props.theme['yellow-dark']};
   }
 
