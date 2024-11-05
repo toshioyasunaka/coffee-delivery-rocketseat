@@ -11,13 +11,17 @@ export const Radio = styled.label`
   color: ${(props) => props.theme['base-text']};
   border: 1px solid transparent;
   cursor: pointer;
+  transition: all 0.2s;
 
   input[type='radio'] {
     display: none;
-    visibility: hidden;
   }
 
-  &.checked {
+  &:hover {
+    background-color: ${(props) => props.theme['base-hover']};
+  }
+
+  &[data-state='true'] {
     background-color: ${(props) => props.theme['purple-light']};
     color: ${(props) => props.theme['base-text']};
     border: ${(props) => '1px solid ' + props.theme.purple};

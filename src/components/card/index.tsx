@@ -1,5 +1,6 @@
-import { ShoppingCart } from '@phosphor-icons/react'
+import { ShoppingCart, CheckFat } from '@phosphor-icons/react'
 import { useTheme } from 'styled-components'
+import { useEffect, useState } from 'react'
 
 import { Container, Tags, Description, Control, Price, Order } from './style'
 import { QuantityInput } from '../form/QuantityInput/index'
@@ -17,6 +18,29 @@ type CardProps = {
 
 export function Card({ coffee }: CardProps) {
   const theme = useTheme()
+  const [useCheckIcon, setUseCheckIcon] = useState(false)
+
+  function changeIcon() {
+    setUseCheckIcon(true)
+  }
+
+  useEffect(() => {
+    let timeout: number
+
+    if (useCheckIcon) {
+      timeout = Number(
+        setTimeout(() => {
+          setUseCheckIcon(false)
+        }, 1000),
+      )
+    }
+
+    return () => {
+      if (timeout) {
+        clearTimeout(timeout)
+      }
+    }
+  }, [useCheckIcon])
 
   return (
     <Container>
@@ -40,8 +64,19 @@ export function Card({ coffee }: CardProps) {
 
         <Order>
           <QuantityInput />
-          <button className="shoppingCart">
-            <ShoppingCart size={22} weight="fill" color={theme['base-card']} />
+          <button
+            className={useCheckIcon ? 'CheckIcon' : 'shoppingCart'}
+            onClick={changeIcon}
+          >
+            {useCheckIcon ? (
+              <CheckFat size={22} weight="fill" color={theme['base-card']} />
+            ) : (
+              <ShoppingCart
+                size={22}
+                weight="fill"
+                color={theme['base-card']}
+              />
+            )}
           </button>
         </Order>
       </Control>

@@ -72,16 +72,24 @@ export const Order = styled.div`
     display: flex;
     align-items: center;
     justify-content: center;
-    background-color: ${(props) => props.theme['purple-dark']};
     padding: 0.5rem;
     border-radius: 6px;
     width: 2.375rem;
     border: none;
     cursor: pointer;
+
+    transition: all 0.2s;
+  }
+
+  button.checkedIcon {
+    background-color: ${(props) => props.theme['yellow-dark']};
+  }
+
+  button.shoppingCart {
+    background-color: ${(props) => props.theme['purple-dark']};
   }
 
   button.shoppingCart:hover {
     background-color: ${(props) => props.theme.purple};
-    transition: background-color 3ms;
   }
 `

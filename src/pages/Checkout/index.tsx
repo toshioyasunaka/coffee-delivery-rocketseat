@@ -1,5 +1,4 @@
 import { useForm } from 'react-hook-form'
-import { useRef } from 'react'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { z } from 'zod'
 import {
@@ -11,10 +10,7 @@ import {
 } from '@phosphor-icons/react'
 import { useTheme } from 'styled-components'
 
-import {
-  PaymentMethod,
-  PaymentRadio,
-} from '../../components/form/PaymentRadio/Index'
+import { PaymentRadio } from '../../components/form/PaymentRadio/Index'
 import { CartItem } from '../../components/form/CartItem/Index'
 import {
   CheckOut,
@@ -36,21 +32,20 @@ const newOrderValidationSchema = z.object({
   number: z.string(),
   street: z.string(),
   uf: z.string(),
-  paymentMethod: z.enum(['credit', 'debt', 'cash'], {
+  paymentMethod: z.enum(['credit', 'debit', 'cash'], {
     invalid_type_error: 'Informe um método de pagamento',
   }),
 })
 
 export function Checkout() {
   const theme = useTheme()
-  const ref = useRef(null)
 
   type FormInputs = z.infer<typeof newOrderValidationSchema>
 
   const { register, watch, handleSubmit } = useForm<FormInputs>({
     resolver: zodResolver(newOrderValidationSchema),
     defaultValues: {
-      paymentMethod: 'credit',
+      paymentMethod: 'debit',
     },
   })
 
@@ -139,19 +134,17 @@ export function Checkout() {
               <PaymentRadios className="buttonM">
                 <PaymentRadio
                   isSelected={selectedPaymentMethod === 'credit'}
-                  value={PaymentMethod.CREDIT_CARD}
+                  value="credit"
                   {...register('paymentMethod')}
-                  ref={ref}
                 >
                   <CreditCard size={16} color={theme.purple} />
                   <span>CARTÃO DE CRÉDITO</span>
                 </PaymentRadio>
 
                 <PaymentRadio
-                  isSelected={selectedPaymentMethod === 'debt'}
-                  value={PaymentMethod.DEBT_CARD}
+                  isSelected={selectedPaymentMethod === 'debit'}
+                  value="debit"
                   {...register('paymentMethod')}
-                  ref={ref}
                 >
                   <Bank size={16} color={theme.purple} />
                   <span>CARTÃO DE DÉBITO</span>
@@ -159,9 +152,8 @@ export function Checkout() {
 
                 <PaymentRadio
                   isSelected={selectedPaymentMethod === 'cash'}
-                  value={PaymentMethod.CASH}
+                  value="cash"
                   {...register('paymentMethod')}
-                  ref={ref}
                 >
                   <Money size={16} color={theme.purple} />
                   <span>DINHEIRO</span>

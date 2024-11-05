@@ -84,6 +84,10 @@ export const AddressForm = styled.div`
     color: ${(props) => props.theme['base-text']};
   }
 
+  input:focus {
+    border: 1px solid ${(props) => props.theme['yellow-dark']};
+  }
+
   grid-template-areas:
     'cep . .'
     'street street street'
